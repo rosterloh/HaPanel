@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'io.fabric'
+
+def versionMajor = 1
+def versionMinor = 0
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    defaultConfig {
+        applicationId "com.rosterloh.things.hapanel"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode versionMajor * 100 + versionMinor
+        versionName "${versionMajor}.${versionMinor}"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("../debug.keystore")
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+            storePassword "android"
+        }
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+kotlin.experimental.coroutines 'enable'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly deps.androidthings
+    kapt deps.databinding
+    implementation deps.appcompat
+    implementation deps.constraint_layout
+    implementation deps.drawer_layout
+    implementation deps.swiperefresh_layout
+    implementation deps.material
+    implementation deps.lifecycle
+    implementation deps.nav_fragment
+    implementation deps.nav_ui
+    implementation deps.ktx
+    implementation deps.kotlin_stdlib
+    implementation deps.coroutines_android
+    implementation deps.timber
+    implementation deps.koin
+    //implementation deps.firebase_core
+    //implementation deps.crashlytics
+    // Testing dependencies
+    androidTestImplementation deps.runner
+    androidTestImplementation deps.espresso_contrib
+    androidTestImplementation deps.espresso_core
+    testImplementation deps.junit
+}
+
+//apply plugin: 'com.google.gms.google-services'

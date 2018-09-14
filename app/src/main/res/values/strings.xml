@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name" translatable="false">HaPanel</string>
+    <string name="navigation_drawer_header_title" translatable="false">HaPanel</string>
+
+    <string name="navigation_drawer_header_content_description" translation_description="Content description for the image that is shown at the top of the navigation drawer.">Navigation drawer header logo</string>
+    <string name="webview_title" translation_description="Title for the 'Home Assistant' screen where the user can see a webview of their home assistant ui.">Home Assistant</string>
+
+</resources>
